@@ -1,6 +1,6 @@
 {
   "name": "@exodus/zod",
-  "version": "3.24.1-rc.2",
+  "version": "3.24.1-rc.3",
   "author": "Colin McDonnell <colin@colinhacks.com>",
   "repository": {
     "type": "git",
