@@ -60,6 +60,7 @@
   "description": "TypeScript-first schema declaration and validation library with static type inference",
   "files": [
     "/lib/index.mjs",
+    "/lib/types",
     "/index.d.ts"
   ],
   "funding": "https://github.com/sponsors/colinhacks",
