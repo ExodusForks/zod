@@ -58,11 +58,7 @@ export namespace util {
 
   export type noUndefined<T> = T extends undefined ? never : T;
 
-  export const isInteger: NumberConstructor["isInteger"] =
-    typeof Number.isInteger === "function"
-      ? (val) => Number.isInteger(val) // eslint-disable-line ban/ban
-      : (val) =>
-          typeof val === "number" && isFinite(val) && Math.floor(val) === val;
+  export const isInteger = Number.isInteger;
 
   export function joinValues<T extends any[]>(
     array: T,
