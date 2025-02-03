@@ -21,7 +21,7 @@ export namespace util {
   export const arrayToEnum = <T extends string, U extends [T, ...T[]]>(
     items: U
   ): { [k in U[number]]: k } => {
-    const obj: any = {};
+    const obj: any = Object.create(null);
     for (const item of items) {
       obj[item] = item;
     }
@@ -32,7 +32,7 @@ export namespace util {
     const validKeys = objectKeys(obj).filter(
       (k: any) => typeof obj[obj[k]] !== "number"
     );
-    const filtered: any = {};
+    const filtered: any = Object.create(null);
     for (const k of validKeys) {
       filtered[k] = obj[k];
     }
