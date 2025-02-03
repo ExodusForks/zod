@@ -28,7 +28,7 @@ export namespace util {
     return obj as any;
   };
 
-  export const getValidEnumValues = (obj: any) => {
+  export const getValidEnumValues = (obj: any): any[] => {
     const validKeys = objectKeys(obj).filter(
       (k: any) => typeof obj[obj[k]] !== "number"
     );
@@ -39,24 +39,9 @@ export namespace util {
     return objectValues(filtered);
   };
 
-  export const objectValues = (obj: any) => {
-    return objectKeys(obj).map(function (e) {
-      return obj[e];
-    });
-  };
+  export const objectValues: ObjectConstructor["values"] = Object.values;
 
-  export const objectKeys: ObjectConstructor["keys"] =
-    typeof Object.keys === "function" // eslint-disable-line ban/ban
-      ? (obj: any) => Object.keys(obj) // eslint-disable-line ban/ban
-      : (object: any) => {
-          const keys = [];
-          for (const key in object) {
-            if (Object.prototype.hasOwnProperty.call(object, key)) {
-              keys.push(key);
-            }
-          }
-          return keys;
-        };
+  export const objectKeys: ObjectConstructor["keys"] = Object.keys;
 
   export const find = <T>(
     arr: T[],
