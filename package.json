@@ -59,12 +59,9 @@
   },
   "description": "TypeScript-first schema declaration and validation library with static type inference",
   "files": [
-    "/lib/index.mjs",
-    "/lib/types",
+    "/lib",
     "/index.d.ts",
-    "!/lib/types/**/*.map",
-    "!/lib/types/playground*",
-    "!**/__tests__"
+    "!/lib/benchmarks"
   ],
   "funding": "https://github.com/sponsors/colinhacks",
   "homepage": "https://zod.dev",
