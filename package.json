@@ -61,7 +61,10 @@
   "files": [
     "/lib/index.mjs",
     "/lib/types",
-    "/index.d.ts"
+    "/index.d.ts",
+    "!/lib/types/**/*.map",
+    "!/lib/types/playground*",
+    "!**/__tests__"
   ],
   "funding": "https://github.com/sponsors/colinhacks",
   "homepage": "https://zod.dev",
