@@ -139,7 +139,7 @@ export class ParseStatus {
       alwaysSet?: boolean;
     }[]
   ): SyncParseReturnType {
-    const finalObject: any = {};
+    const finalObject: any = Object.create(null);
     for (const pair of pairs) {
       const { key, value } = pair;
       if (key.status === "aborted") return INVALID;
