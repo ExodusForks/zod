@@ -2541,7 +2541,7 @@ export type noUnrecognized<Obj extends object, Shape extends object> = {
 
 function deepPartialify(schema: ZodTypeAny): any {
   if (schema instanceof ZodObject) {
-    const newShape: any = {};
+    const newShape: any = Object.create(null);
 
     for (const key in schema.shape) {
       const fieldSchema = schema.shape[key];
@@ -2905,7 +2905,7 @@ export class ZodObject<
   pick<Mask extends util.Exactly<{ [k in keyof T]?: true }, Mask>>(
     mask: Mask
   ): ZodObject<Pick<T, Extract<keyof T, keyof Mask>>, UnknownKeys, Catchall> {
-    const shape: any = {};
+    const shape: any = Object.create(null);
 
     util.objectKeys(mask).forEach((key) => {
       if (mask[key] && this.shape[key]) {
@@ -2922,7 +2922,7 @@ export class ZodObject<
   omit<Mask extends util.Exactly<{ [k in keyof T]?: true }, Mask>>(
     mask: Mask
   ): ZodObject<Omit<T, keyof Mask>, UnknownKeys, Catchall> {
-    const shape: any = {};
+    const shape: any = Object.create(null);
 
     util.objectKeys(this.shape).forEach((key) => {
       if (!mask[key]) {
@@ -2958,7 +2958,7 @@ export class ZodObject<
     Catchall
   >;
   partial(mask?: any) {
-    const newShape: any = {};
+    const newShape: any = Object.create(null);
 
     util.objectKeys(this.shape).forEach((key) => {
       const fieldSchema = this.shape[key];
@@ -2991,7 +2991,7 @@ export class ZodObject<
     Catchall
   >;
   required(mask?: any) {
-    const newShape: any = {};
+    const newShape: any = Object.create(null);
 
     util.objectKeys(this.shape).forEach((key) => {
       if (mask && !mask[key]) {
@@ -4384,7 +4384,7 @@ export class ZodEnum<T extends [string, ...string[]]> extends ZodType<
   }
 
   get enum(): Values<T> {
-    const enumValues: any = {};
+    const enumValues: any = Object.create(null);
     for (const val of this._def.values) {
       enumValues[val] = val;
     }
@@ -4392,7 +4392,7 @@ export class ZodEnum<T extends [string, ...string[]]> extends ZodType<
   }
 
   get Values(): Values<T> {
-    const enumValues: any = {};
+    const enumValues: any = Object.create(null);
     for (const val of this._def.values) {
       enumValues[val] = val;
     }
@@ -4400,7 +4400,7 @@ export class ZodEnum<T extends [string, ...string[]]> extends ZodType<
   }
 
   get Enum(): Values<T> {
-    const enumValues: any = {};
+    const enumValues: any = Object.create(null);
     for (const val of this._def.values) {
       enumValues[val] = val;
     }
@@ -5238,7 +5238,10 @@ export class ZodReadonly<T extends ZodTypeAny> extends ZodType<
 type CustomParams = CustomErrorParams & { fatal?: boolean };
 export function custom<T>(
   check?: (data: any) => any,
-  params: string | CustomParams | ((input: any) => CustomParams) = {},
+  params:
+    | string
+    | CustomParams
+    | ((input: any) => CustomParams) = Object.create(null),
   /**
    * @deprecated
    *
