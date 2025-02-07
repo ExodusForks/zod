@@ -1,10 +1,10 @@
 {
   "name": "@exodus/zod",
   "version": "3.24.1-rc.4",
-  "author": "Colin McDonnell <colin@colinhacks.com>",
+  "author": "Exodus Movement, Inc.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/colinhacks/zod.git"
+    "url": "git+https://github.com/ExodusMovement/zod.git"
   },
   "type": "module",
   "module": "./lib/index.mjs",
@@ -55,7 +55,7 @@
     "./package.json": "./package.json"
   },
   "bugs": {
-    "url": "https://github.com/colinhacks/zod/issues"
+    "url": "https://github.com/ExodusMovement/zod/issues"
   },
   "description": "TypeScript-first schema declaration and validation library with static type inference",
   "files": [
@@ -63,8 +63,6 @@
     "/index.d.ts",
     "!/lib/benchmarks"
   ],
-  "funding": "https://github.com/sponsors/colinhacks",
-  "homepage": "https://zod.dev",
   "keywords": [
     "typescript",
     "schema",
@@ -102,11 +100,7 @@
     "test:ts-jest": "npx jest --config ./configs/ts-jest.config.json",
     "test:swc": "npx jest --config ./configs/swc-jest.config.json",
     "prepublishOnly": "npm run test && npm run build",
-    "play": "nodemon -e ts -w . -x tsx playground.ts",
-    "depcruise": "depcruise -c .dependency-cruiser.js src",
-    "benchmark": "tsx src/benchmarks/index.ts",
-    "prepare": "husky install",
-    "docs": "netlify dev"
+    "benchmark": "tsx src/benchmarks/index.ts"
   },
   "sideEffects": false,
   "support": {
