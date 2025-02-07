@@ -23,8 +23,6 @@
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
     "babel-jest": "^29.5.0",
-    "benchmark": "^2.1.4",
-    "dependency-cruiser": "^9.19.0",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-ban": "^1.6.0",
@@ -99,8 +97,7 @@
     "test:vitest": "npx vitest --config ./configs/vitest.config.ts",
     "test:ts-jest": "npx jest --config ./configs/ts-jest.config.json",
     "test:swc": "npx jest --config ./configs/swc-jest.config.json",
-    "prepublishOnly": "npm run test && npm run build",
-    "benchmark": "tsx src/benchmarks/index.ts"
+    "prepublishOnly": "npm run test && npm run build"
   },
   "sideEffects": false,
   "support": {
