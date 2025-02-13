@@ -107,6 +107,7 @@ export namespace objectUtil {
 
   export const mergeShapes = <U, T>(first: U, second: T): T & U => {
     return {
+      __proto__: null,
       ...first,
       ...second, // second overwrites first
     };

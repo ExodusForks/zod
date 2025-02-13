@@ -128,7 +128,7 @@ export type ProcessedCreateParams = {
   description?: string;
 };
 function processCreateParams(params: RawCreateParams): ProcessedCreateParams {
-  if (!params) return {};
+  if (!params) return Object.create(null);
   const { errorMap, invalid_type_error, required_error, description } = params;
   if (errorMap && (invalid_type_error || required_error)) {
     throw new Error(
@@ -2716,7 +2716,7 @@ export class ZodObject<
               };
             },
           }
-        : {}),
+        : Object.create(null)),
     }) as any;
   }
 
@@ -2869,7 +2869,7 @@ export class ZodObject<
     key: Key,
     schema: Schema
   ): ZodObject<T & { [k in Key]: Schema }, UnknownKeys, Catchall> {
-    return this.augment({ [key]: schema }) as any;
+    return this.augment(Object.assign(Object.create(null), { [key]: schema })) as any;
   }
   // merge<Incoming extends AnyZodObject>(
   //   merging: Incoming
@@ -3417,7 +3417,7 @@ function mergeValues(
       .objectKeys(a)
       .filter((key) => bKeys.indexOf(key) !== -1);
 
-    const newObj: any = { ...a, ...b };
+    const newObj: any = {__proto__: null, ...a, ...b };
     for (const key of sharedKeys) {
       const sharedValue = mergeValues(a[key], b[key]);
       if (!sharedValue.valid) {
