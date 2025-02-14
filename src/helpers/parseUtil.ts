@@ -148,7 +148,7 @@ export class ParseStatus {
       if (value.status === "dirty") status.dirty();
 
       if (
-        !["__proto__", "prototype", "constructor"].includes(key.value) &&
+        !(key.value in Object.prototype) &&
         (typeof value.value !== "undefined" || pair.alwaysSet)
       ) {
         finalObject[key.value] = value.value;
