@@ -43,7 +43,11 @@
     "tslib": "^2.3.1",
     "tsx": "^3.8.0",
     "typescript": "^5.0.0",
-    "vitest": "^0.32.2"
+    "vitest": "^0.32.2",
+    "semantic-release": "^21.1.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/github": "^9.2.3",
+    "conventional-changelog-conventionalcommits": "^6.0.0"
   },
   "exports": {
     ".": {
@@ -97,7 +101,8 @@
     "test:vitest": "npx vitest --config ./configs/vitest.config.ts",
     "test:ts-jest": "npx jest --config ./configs/ts-jest.config.json",
     "test:swc": "npx jest --config ./configs/swc-jest.config.json",
-    "prepublishOnly": "npm run test && npm run build"
+    "prepublishOnly": "npm run test && npm run build",
+    "release": "semantic-release"
   },
   "sideEffects": false,
   "support": {
@@ -105,5 +110,6 @@
       "npm-funding": true
     }
   },
-  "types": "./index.d.ts"
+  "types": "./index.d.ts",
+  "packageManager": "yarn@1.22.19+sha512.ff4579ab459bb25aa7c0ff75b62acebe576f6084b36aa842971cf250a5d8c6cd3bc9420b22ce63c7f93a0857bc6ef29291db39c3e7a23aab5adfd5a4dd6c5d71"
 }
