@@ -936,8 +936,7 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
         }
       } else if (check.kind === "regex") {
         check.regex.lastIndex = 0;
-        const testResult = check.regex.test(input.data);
-        if (!testResult) {
+        if (!(check.regex instanceof RegExp) || !check.regex.test(input.data)) {
           ctx = this._getOrReturnCtx(input, ctx);
           addIssueToContext(ctx, {
             validation: "regex",
