@@ -114,6 +114,8 @@ const handleResult = <Input, Output>(
   }
 };
 
+const allowedChecks: ZodStringCheck["kind"][] = ["min", "max", "length", "email", "url", "uuid", "includes", "startsWith", "endsWith", "regex", "trim", "toLowerCase", "toUpperCase", "datetime", "date", "time", "ip", "base64"];
+
 export type RawCreateParams =
   | {
       errorMap?: ZodErrorMap;
@@ -1093,6 +1095,9 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
   }
 
   _addCheck(check: ZodStringCheck) {
+    if (!allowedChecks.includes(check.kind)) {
+      throw new Error(`Check type "${check.kind}" is disabled. Reach out to AppSec if you need it.`);
+    }
     return new ZodString({
       ...this._def,
       checks: [...this._def.checks, check],
@@ -1307,9 +1312,9 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
   get isTime() {
     return !!this._def.checks.find((ch) => ch.kind === "time");
   }
-  get isDuration() {
-    return !!this._def.checks.find((ch) => ch.kind === "duration");
-  }
+  // get isDuration() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "duration");
+  // }
 
   get isEmail() {
     return !!this._def.checks.find((ch) => ch.kind === "email");
@@ -1319,39 +1324,39 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
     return !!this._def.checks.find((ch) => ch.kind === "url");
   }
 
-  get isEmoji() {
-    return !!this._def.checks.find((ch) => ch.kind === "emoji");
-  }
+  // get isEmoji() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "emoji");
+  // }
 
   get isUUID() {
     return !!this._def.checks.find((ch) => ch.kind === "uuid");
   }
-  get isNANOID() {
-    return !!this._def.checks.find((ch) => ch.kind === "nanoid");
-  }
-  get isCUID() {
-    return !!this._def.checks.find((ch) => ch.kind === "cuid");
-  }
+  // get isNANOID() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "nanoid");
+  // }
+  // get isCUID() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "cuid");
+  // }
 
-  get isCUID2() {
-    return !!this._def.checks.find((ch) => ch.kind === "cuid2");
-  }
-  get isULID() {
-    return !!this._def.checks.find((ch) => ch.kind === "ulid");
-  }
+  // get isCUID2() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "cuid2");
+  // }
+  // get isULID() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "ulid");
+  // }
   get isIP() {
     return !!this._def.checks.find((ch) => ch.kind === "ip");
   }
-  get isCIDR() {
-    return !!this._def.checks.find((ch) => ch.kind === "cidr");
-  }
+  // get isCIDR() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "cidr");
+  // }
   get isBase64() {
     return !!this._def.checks.find((ch) => ch.kind === "base64");
   }
-  get isBase64url() {
-    // base64url encoding is a modification of base64 that can safely be used in URLs and filenames
-    return !!this._def.checks.find((ch) => ch.kind === "base64url");
-  }
+  // get isBase64url() {
+  //   // base64url encoding is a modification of base64 that can safely be used in URLs and filenames
+  //   return !!this._def.checks.find((ch) => ch.kind === "base64url");
+  // }
 
   get minLength() {
     let min: number | null = null;
