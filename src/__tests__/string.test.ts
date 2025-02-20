@@ -1,7 +1,7 @@
 // @ts-ignore TS6133
 import { expect, test } from "@jest/globals";
-// import { Buffer } from "node:buffer";
 
+// import { Buffer } from "node:buffer";
 import * as z from "../index";
 
 const minFive = z.string().min(5, "min5");
@@ -293,9 +293,11 @@ test("url validations", () => {
   const url = z.string().url();
   url.parse("http://google.com");
   url.parse("https://google.com/asdf?asdf=ljk3lk4&asdf=234#asdf");
+  url.parse("ftp:///google.com:8080/foo/bar?a=1,2,3");
   expect(() => url.parse("asdf")).toThrow();
   expect(() => url.parse("https:/")).toThrow();
   expect(() => url.parse("asdfj@lkjsdf.com")).toThrow();
+  expect(() => url.parse("https://asdf.com,https://asdf")).toThrow();
 });
 
 test("url error overrides", () => {
