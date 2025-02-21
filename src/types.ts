@@ -114,7 +114,7 @@ const handleResult = <Input, Output>(
   }
 };
 
-const allowedChecks: ZodStringCheck["kind"][] = ["min", "max", "length", "email", "url", "uuid", "includes", "startsWith", "endsWith", "regex", "trim", "toLowerCase", "toUpperCase", "datetime", "date", "time", "ip", "base64"];
+const allowedChecks = new Set<ZodStringCheck["kind"]>(["min", "max", "length", "email", "url", "uuid", "includes", "startsWith", "endsWith", "regex", "trim", "toLowerCase", "toUpperCase", "datetime", "date", "time", "ip", "base64"]);
 
 export type RawCreateParams =
   | {
@@ -1098,7 +1098,7 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
   }
 
   _addCheck(check: ZodStringCheck) {
-    if (!allowedChecks.includes(check.kind)) {
+    if (!allowedChecks.has(check.kind)) {
       throw new Error(`Check type "${check.kind}" is disabled. Reach out to AppSec if you need it.`);
     }
     return new ZodString({
