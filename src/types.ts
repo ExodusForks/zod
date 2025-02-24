@@ -983,8 +983,10 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
         }
       } else if (check.kind === "datetime") {
         const regex = datetimeRegex(check);
+        const isoDatetime = new Date(input.data);
+        const valid = isoDatetime.toISOString() === input.data
 
-        if (!regex.test(input.data)) {
+        if (!regex.test(input.data) || !valid) {
           ctx = this._getOrReturnCtx(input, ctx);
           addIssueToContext(ctx, {
             code: ZodIssueCode.invalid_string,
@@ -995,8 +997,11 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
         }
       } else if (check.kind === "date") {
         const regex = dateRegex;
+        const date = new Date(input.data);
+        const isoDateOnly = date.toISOString().split('T')[0];
+        const valid = isoDateOnly === input.data
 
-        if (!regex.test(input.data)) {
+        if (!regex.test(input.data) || !valid) {
           ctx = this._getOrReturnCtx(input, ctx);
           addIssueToContext(ctx, {
             code: ZodIssueCode.invalid_string,
