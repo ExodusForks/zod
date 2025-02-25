@@ -986,7 +986,7 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
         const isoDatetime = new Date(input.data);
         const valid = isoDatetime.toISOString() === input.data
 
-        if (!regex.test(input.data) || !valid) {
+        if (!valid || !regex.test(input.data)) {
           ctx = this._getOrReturnCtx(input, ctx);
           addIssueToContext(ctx, {
             code: ZodIssueCode.invalid_string,
@@ -1001,7 +1001,7 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
         const isoDateOnly = date.toISOString().split('T')[0];
         const valid = isoDateOnly === input.data
 
-        if (!regex.test(input.data) || !valid) {
+        if (!valid || !regex.test(input.data)) {
           ctx = this._getOrReturnCtx(input, ctx);
           addIssueToContext(ctx, {
             code: ZodIssueCode.invalid_string,
