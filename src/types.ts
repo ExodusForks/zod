@@ -114,6 +114,8 @@ const handleResult = <Input, Output>(
   }
 };
 
+const allowedChecks = new Set<ZodStringCheck["kind"]>(["min", "max", "length", "email", "url", "uuid", "includes", "startsWith", "endsWith", "regex", "trim", "toLowerCase", "toUpperCase", "datetime", "date", "time", "ip", "base64"]);
+
 export type RawCreateParams =
   | {
       errorMap?: ZodErrorMap;
@@ -640,6 +642,7 @@ const ulidRegex = /^[0-9A-HJKMNP-TV-Z]{26}$/i;
 //   /^([a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12}|00000000-0000-0000-0000-000000000000)$/i;
 const uuidRegex =
   /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
+const urlRegex = /^(?:[a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]{2,}(?:\:\d{1,5})?$/;
 const nanoidRegex = /^[a-z0-9_-]{21}$/i;
 const jwtRegex = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]*$/;
 const durationRegex =
@@ -699,7 +702,7 @@ function timeRegexSource(args: { precision?: number | null }) {
   // let regex = `\\d{2}:\\d{2}:\\d{2}`;
   let regex = `([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d`;
 
-  if (args.precision) {
+  if (args.precision && typeof args.precision === "number") {
     regex = `${regex}\\.\\d{${args.precision}}`;
   } else if (args.precision == null) {
     regex = `${regex}(\\.\\d+)?`;
@@ -918,7 +921,10 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
         }
       } else if (check.kind === "url") {
         try {
-          new URL(input.data);
+          const parsed = new URL(input.data);
+          if (!urlRegex.test(parsed.host)) {
+            throw new Error();
+          }
         } catch {
           ctx = this._getOrReturnCtx(input, ctx);
           addIssueToContext(ctx, {
@@ -930,8 +936,7 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
         }
       } else if (check.kind === "regex") {
         check.regex.lastIndex = 0;
-        const testResult = check.regex.test(input.data);
-        if (!testResult) {
+        if (!(check.regex instanceof RegExp) || !check.regex.test(input.data)) {
           ctx = this._getOrReturnCtx(input, ctx);
           addIssueToContext(ctx, {
             validation: "regex",
@@ -978,8 +983,10 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
         }
       } else if (check.kind === "datetime") {
         const regex = datetimeRegex(check);
+        const isoDatetime = new Date(input.data);
+        const valid = isoDatetime.toISOString() === input.data
 
-        if (!regex.test(input.data)) {
+        if (!valid || !regex.test(input.data)) {
           ctx = this._getOrReturnCtx(input, ctx);
           addIssueToContext(ctx, {
             code: ZodIssueCode.invalid_string,
@@ -990,8 +997,11 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
         }
       } else if (check.kind === "date") {
         const regex = dateRegex;
+        const date = new Date(input.data);
+        const isoDateOnly = date.toISOString().split('T')[0];
+        const valid = isoDateOnly === input.data
 
-        if (!regex.test(input.data)) {
+        if (!valid || !regex.test(input.data)) {
           ctx = this._getOrReturnCtx(input, ctx);
           addIssueToContext(ctx, {
             code: ZodIssueCode.invalid_string,
@@ -1093,6 +1103,9 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
   }
 
   _addCheck(check: ZodStringCheck) {
+    if (!allowedChecks.has(check.kind)) {
+      throw new Error(`Check type "${check.kind}" is disabled. Reach out to AppSec if you need it.`);
+    }
     return new ZodString({
       ...this._def,
       checks: [...this._def.checks, check],
@@ -1307,9 +1320,9 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
   get isTime() {
     return !!this._def.checks.find((ch) => ch.kind === "time");
   }
-  get isDuration() {
-    return !!this._def.checks.find((ch) => ch.kind === "duration");
-  }
+  // get isDuration() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "duration");
+  // }
 
   get isEmail() {
     return !!this._def.checks.find((ch) => ch.kind === "email");
@@ -1319,39 +1332,39 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
     return !!this._def.checks.find((ch) => ch.kind === "url");
   }
 
-  get isEmoji() {
-    return !!this._def.checks.find((ch) => ch.kind === "emoji");
-  }
+  // get isEmoji() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "emoji");
+  // }
 
   get isUUID() {
     return !!this._def.checks.find((ch) => ch.kind === "uuid");
   }
-  get isNANOID() {
-    return !!this._def.checks.find((ch) => ch.kind === "nanoid");
-  }
-  get isCUID() {
-    return !!this._def.checks.find((ch) => ch.kind === "cuid");
-  }
+  // get isNANOID() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "nanoid");
+  // }
+  // get isCUID() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "cuid");
+  // }
 
-  get isCUID2() {
-    return !!this._def.checks.find((ch) => ch.kind === "cuid2");
-  }
-  get isULID() {
-    return !!this._def.checks.find((ch) => ch.kind === "ulid");
-  }
+  // get isCUID2() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "cuid2");
+  // }
+  // get isULID() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "ulid");
+  // }
   get isIP() {
     return !!this._def.checks.find((ch) => ch.kind === "ip");
   }
-  get isCIDR() {
-    return !!this._def.checks.find((ch) => ch.kind === "cidr");
-  }
+  // get isCIDR() {
+  //   return !!this._def.checks.find((ch) => ch.kind === "cidr");
+  // }
   get isBase64() {
     return !!this._def.checks.find((ch) => ch.kind === "base64");
   }
-  get isBase64url() {
-    // base64url encoding is a modification of base64 that can safely be used in URLs and filenames
-    return !!this._def.checks.find((ch) => ch.kind === "base64url");
-  }
+  // get isBase64url() {
+  //   // base64url encoding is a modification of base64 that can safely be used in URLs and filenames
+  //   return !!this._def.checks.find((ch) => ch.kind === "base64url");
+  // }
 
   get minLength() {
     let min: number | null = null;
