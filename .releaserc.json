@@ -1,5 +1,5 @@
 {
-  "branches": ["exodus-3.24.1"],
+  "branches": ["exodus-3.24.1", "sparten11740/feat/fetch-depth"],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
