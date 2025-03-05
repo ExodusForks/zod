@@ -52,7 +52,8 @@
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "import": "./lib/index.mjs"
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.mjs"
     },
     "./package.json": "./package.json"
   },
