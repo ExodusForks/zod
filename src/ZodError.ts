@@ -226,7 +226,7 @@ export class ZodError<T = any> extends Error {
       function (issue: ZodIssue) {
         return issue.message;
       };
-    const fieldErrors: ZodFormattedError<T> = { _errors: [] } as any;
+    const fieldErrors: ZodFormattedError<T> = { __proto__: null,_errors: [] } as any;
     const processError = (rootError: ZodError) => {
       const stack = [rootError];
 
