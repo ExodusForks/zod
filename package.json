@@ -45,10 +45,9 @@
     "tsx": "^3.8.0",
     "typescript": "^5.0.0",
     "vitest": "^0.32.2",
-    "semantic-release": "^21.1.1",
+    "semantic-release": "^25.0.2",
     "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/github": "^9.2.3",
-    "conventional-changelog-conventionalcommits": "^6.0.0"
+    "conventional-changelog-conventionalcommits": "^9.1.0"
   },
   "exports": {
     ".": {
