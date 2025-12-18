@@ -20,6 +20,9 @@
     "@seriousme/openapi-schema-validator": "2.5.0",
     "@types/benchmark": "^2.1.5",
     "@types/semver": "^7.7.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "semantic-release": "^25.0.2",
     "@web-std/file": "^3.0.3",
     "arktype": "^2.1.19",
     "benchmark": "^2.1.4",
@@ -62,6 +65,7 @@
     ]
   },
   "scripts": {
+    "release": "semantic-release",
     "fix": "pnpm run format && pnpm run lint",
     "format": "biome check --write .",
     "format:check": "biome check .",
