@@ -22,12 +22,14 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      - name: Setup pnpm
+        uses: pnpm/action-setup@1e1c8eafbd745f64b1ef30a7d7ed7965034c486c
+        with:
+          run_install: false
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8
         with:
           node-version: 20
           cache: 'pnpm'
-      - name: Setup pnpm
-        uses: pnpm/action-setup@1e1c8eafbd745f64b1ef30a7d7ed7965034c486c
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Release
