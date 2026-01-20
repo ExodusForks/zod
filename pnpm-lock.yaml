@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@semantic-release/git':
-        specifier: ^10.0.1
-        version: 10.0.1(semantic-release@25.0.2(typescript@5.5.4))
     devDependencies:
       '@arethetypeswrong/cli':
         specifier: ^0.17.4
@@ -21,6 +17,9 @@ importers:
       '@semantic-release/changelog':
         specifier: ^6.0.3
         version: 6.0.3(semantic-release@25.0.2(typescript@5.5.4))
+      '@semantic-release/git':
+        specifier: ^10.0.1
+        version: 10.0.1(semantic-release@25.0.2(typescript@5.5.4))
       '@seriousme/openapi-schema-validator':
         specifier: 2.5.0
         version: 2.5.0

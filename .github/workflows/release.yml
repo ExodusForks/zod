@@ -7,7 +7,7 @@ on:
       - "packages/zod/package.json"
       - "packages/zod/src/**"
       - ".github/workflows/release.yml"
-      - ".releaserc.json"
+      - "../../packages/zod/.releaserc.json"
 
 permissions:
   contents: write
@@ -40,6 +40,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Release
+        working-directory: packages/zod
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: pnpm run release
