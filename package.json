@@ -18,17 +18,16 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.4",
     "@biomejs/biome": "^1.9.4",
+    "@semantic-release/changelog": "^6.0.3",
     "@seriousme/openapi-schema-validator": "2.5.0",
     "@types/benchmark": "^2.1.5",
     "@types/semver": "^7.7.0",
-    "@semantic-release/changelog": "^6.0.3",
-    "conventional-changelog-conventionalcommits": "^9.1.0",
-    "semantic-release": "^25.0.2",
     "@web-std/file": "^3.0.3",
     "arktype": "^2.1.19",
     "benchmark": "^2.1.4",
     "chalk": "^5.4.1",
     "console-table-printer": "^2.12.1",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
     "esbuild": "^0.25.5",
     "execa": "^9.5.2",
     "globby": "^14.1.0",
@@ -39,6 +38,7 @@
     "recheck": "^4.5.0",
     "rolldown": "1.0.0-beta.18",
     "rollup": "^4.39.0",
+    "semantic-release": "^25.0.2",
     "semver": "^7.7.2",
     "supershy": "^1.0.0",
     "tinybench": "^2.9.0",
@@ -86,5 +86,8 @@
     "postbuild": "biome format --write .",
     "bundle:rollup": "rollup -c",
     "bundle:esbuild": "esbuild --bundle ./scratch/input.ts --outfile=./scratch/out_esbuild.js --bundle --format=esm"
+  },
+  "dependencies": {
+    "@semantic-release/git": "^10.0.1"
   }
 }
