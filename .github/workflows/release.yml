@@ -8,6 +8,7 @@ on:
       - "packages/zod/src/**"
       - ".github/workflows/release.yml"
       - "../../packages/zod/.releaserc.json"
+      - "pnpm-lock.yaml"
 
 permissions:
   contents: write
