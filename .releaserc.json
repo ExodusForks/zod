@@ -1,5 +1,6 @@
 {
-  "branches": ["exodus-4.1.9"],
+  "repositoryUrl": "git@github.com:ExodusMovement/zod.git",
+  "branches": ["main", { "name": "exodus", "prerelease": true }],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
