@@ -1,5 +1,6 @@
 name: Release on npm
 on:
+  workflow_dispatch:
   push:
     branches:
       - exodus
@@ -38,6 +39,7 @@ jobs:
         with:
           node-version: 22.16
           cache: 'pnpm'
+      - run: npm install -g npm@11
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Release
