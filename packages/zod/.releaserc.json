@@ -1,6 +1,6 @@
 {
   "repositoryUrl": "git@github.com:ExodusMovement/zod.git",
-  "branches": ["main", { "name": "exodus", "prerelease": true }, { "name": "mv/fix-release", "prerelease": "rc" }],
+  "branches": ["main", { "name": "exodus", "prerelease": true }],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",

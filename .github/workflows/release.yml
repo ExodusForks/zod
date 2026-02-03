@@ -1,6 +1,5 @@
 name: Release on npm
 on:
-  workflow_dispatch:
   push:
     branches:
       - exodus
