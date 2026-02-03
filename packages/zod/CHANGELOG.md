@@ -1,3 +1,9 @@
+## [4.2.0-exodus.5](https://github.com/ExodusMovement/zod/compare/v4.2.0-exodus.4...v4.2.0-exodus.5) (2026-02-03)
+
+### Reverts
+
+- Revert "fix: remove npm cli upgrade" ([8716133](https://github.com/ExodusMovement/zod/commit/8716133905a05d7d2fc6ae4e8ee4bc7bd7407f8a))
+
 ## [4.2.0-exodus.4](https://github.com/ExodusMovement/zod/compare/v4.2.0-exodus.3...v4.2.0-exodus.4) (2026-02-03)
 
 ### Bug Fixes
