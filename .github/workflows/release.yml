@@ -41,8 +41,6 @@ jobs:
           cache: 'pnpm'
       - run: npm install -g npm@11
       - run: pnpm install --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: pnpm build
       - name: Release
         working-directory: packages/zod
