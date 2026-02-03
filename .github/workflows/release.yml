@@ -38,10 +38,14 @@ jobs:
         with:
           node-version: 22.16
           cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
       - run: pnpm install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: pnpm build
       - name: Release
         working-directory: packages/zod
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm run release
