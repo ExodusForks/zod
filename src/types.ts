@@ -1,6 +1,6 @@
-import { defaultErrorMap, getErrorMap } from "./errors";
-import { enumUtil } from "./helpers/enumUtil";
-import { errorUtil } from "./helpers/errorUtil";
+import { defaultErrorMap, getErrorMap } from "./errors.js";
+import { enumUtil } from "./helpers/enumUtil.js";
+import { errorUtil } from "./helpers/errorUtil.js";
 import {
   addIssueToContext,
   AsyncParseReturnType,
@@ -19,11 +19,11 @@ import {
   ParseReturnType,
   ParseStatus,
   SyncParseReturnType,
-} from "./helpers/parseUtil";
-import { partialUtil } from "./helpers/partialUtil";
-import { Primitive } from "./helpers/typeAliases";
-import { getParsedType, objectUtil, util, ZodParsedType } from "./helpers/util";
-import type { StandardSchemaV1 } from "./standard-schema";
+} from "./helpers/parseUtil.js";
+import { partialUtil } from "./helpers/partialUtil.js";
+import { Primitive } from "./helpers/typeAliases.js";
+import { getParsedType, objectUtil, util, ZodParsedType } from "./helpers/util.js";
+import type { StandardSchemaV1 } from "./standard-schema.js";
 import {
   IssueData,
   StringValidation,
@@ -32,7 +32,7 @@ import {
   ZodErrorMap,
   ZodIssue,
   ZodIssueCode,
-} from "./ZodError";
+} from "./ZodError.js";
 
 ///////////////////////////////////////
 ///////////////////////////////////////
