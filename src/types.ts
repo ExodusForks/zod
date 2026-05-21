@@ -3247,7 +3247,7 @@ const getDiscriminator = <T extends ZodTypeAny>(type: T): Primitive[] => {
       result.push(...current.options);
     } else if (current instanceof ZodNativeEnum) {
       // eslint-disable-next-line ban/ban
-      result.push(...util.objectValues(current.enum as any));
+      result.push(...(util.objectValues(current.enum as any) as Primitive[]));
     } else if (current instanceof ZodDefault) {
       stack.push(current._def.innerType);
     } else if (current instanceof ZodUndefined) {
