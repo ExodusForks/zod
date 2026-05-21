@@ -1,5 +1,5 @@
-import { util, ZodParsedType } from "../helpers/util";
-import { ZodErrorMap, ZodIssueCode } from "../ZodError";
+import { util, ZodParsedType } from "../helpers/util.js";
+import { ZodErrorMap, ZodIssueCode } from "../ZodError.js";
 
 const errorMap: ZodErrorMap = (issue, _ctx) => {
   let message: string;
